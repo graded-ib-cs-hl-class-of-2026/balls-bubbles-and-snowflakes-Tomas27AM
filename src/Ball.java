@@ -1,3 +1,5 @@
+import processing.core.PApplet;
+
 class Ball {
 
     /*
@@ -92,5 +94,25 @@ class Ball {
             ySpeed = -ySpeed;
         }
     }
+   /**  Method: Checks collision with another ball and after the collision is identified it updates the speed of the balls
+   
+    */
+    public void checkCollision(Ball other) {
+    
+        /** Mr. Griswold helped me with this code where he showed me this way to manually find the distance between two object without having to pre determine the disntance for x and y*/
+        float distance = Sketch.dist(this.x, this.y, other.x, other.y);
 
+        /**  This code checks if the distance between two balls is less than both of their radii combined meaning that they must be colliding because their distnace is less than the max distance they can be without touching*/
+        if (distance < this.radius + other.radius) {
+            
+            /** The speeds of the balls are switched with each other as they collide */
+            float temporaryXSpeed = this.xSpeed;
+            float temporaryYSpeed = this.ySpeed;
+            this.xSpeed = other.xSpeed;
+            this.ySpeed = other.ySpeed;
+            other.xSpeed = temporaryXSpeed;
+            other.ySpeed = temporaryYSpeed;
+        }
+
+    }
 }
